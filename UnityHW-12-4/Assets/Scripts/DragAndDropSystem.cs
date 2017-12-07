@@ -8,11 +8,6 @@ public class DragAndDropSystem : MonoBehaviour {
 
     private bool isDragging = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
         if (!isDragging) return;
@@ -24,6 +19,9 @@ public class DragAndDropSystem : MonoBehaviour {
     private void EndDrag() {
         isDragging = false;
         Destroy(prefabUI);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        pos.z = 0;
+        Instantiate(prefab, pos, Quaternion.identity);
     }
 
     public void StartDrag(GameObject prefabUI, GameObject prefab) {
